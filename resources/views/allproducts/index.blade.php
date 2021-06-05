@@ -22,8 +22,8 @@
 					<div class="row">
 						<div class="col">
 							<div class="home_content">
-								<div class="home_title">{{ $category->title }}<span>.</span></div>
-								<div class="home_text"><p>{{$category->desc}}</p></div>
+								<div class="home_title">All products<span>.</span></div>
+								<div class="home_text"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia quae amet harum saepe, deserunt accusamus aut iure facere nihil ducimus et a, minus voluptatum eaque nulla, architecto impedit veniam neque.</p></div>
 							</div>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 					<!-- Product Sorting -->
 					<div class="col-md-12">
 
-            <form method="get" action="{{ route('showCategory', ['cat'=>$category->alias]) }}">
+            <form method="get" action="{{ route('showProducts') }}">
             <div class="form-row">
            
         
