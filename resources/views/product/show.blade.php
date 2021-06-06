@@ -33,6 +33,22 @@
 	</div>
 
 	<!-- Product Details -->
+	@if(Session::has('success'))
+
+<div class="container">
+<div class="alert alert-success">
+
+	{{ Session::get('success') }}
+
+	@php
+
+		Session::forget('success');
+
+	@endphp
+
+</div>
+</div>
+@endif
 
 	<div class="product_details">
 		<div class="container">
@@ -98,7 +114,9 @@
 									<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
 								</div>
 							</div>
-							<div class="button cart_button"><a href="/#">Add to cart</a></div>
+							<div class="button cart_button"><a href="{{ route('cart.store',[
+								'product_id' => $product->id,
+							]) }}">Add to cart</a></div>
 						</div>
 
 						<!-- Share -->

@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('custom-css')
-<link rel="stylesheet" type="text/css" href="styles/categories.css">
-<link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+<link rel="stylesheet" type="text/css" href="/styles/categories.css">
+<link rel="stylesheet" type="text/css" href="/styles/categories_responsive.css">
 @endsection
 @section('custom-js')
-<script src="js/categories.js"></script>
+<script src="/js/categories.js"></script>
 @endsection
 
 
@@ -16,7 +16,7 @@
 
 	<div class="home">
 		<div class="home_container">
-			<div class="home_background" style="background-image:url(images/categories.jpg)"></div>
+			<div class="home_background" style="background-image:url({{ $category->image }})"></div>
 			<div class="home_content_container">
 				<div class="container">
 					<div class="row">
@@ -82,7 +82,7 @@
 							<div class="product_image"><img src="/images/{{$image}}" alt="{{ $product->title }}"></div>
 							<div class="product_extra product_new"><a href="{{route('showCategory', ['cat'=>$product->category['alias']])}}">{{$product->category['title']}}</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="{{route('showProduct',['cat'=>'$product->category->alias', 'alias'=>$product->alias])}}">{{ $product->title }}</a></div>
+								<div class="product_title"><a href="{{route('showProduct',['cat'=>$product->category->alias, 'alias'=>$product->alias])}}">{{ $product->title }}</a></div>
 								@if($product->new_price != null)
 								<div style="text-decoration: line-through; color: red;padding-top:5%;">${{ $product->price}}</div>
 								<div class="product_price">${{ $product->new_price}}</div>

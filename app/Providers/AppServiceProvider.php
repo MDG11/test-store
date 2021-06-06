@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 use App\Models\Category;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;

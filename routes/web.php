@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Controllers\CartController;
 use App\Http\Livewire\User\UserDashboardComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/all-products', [ProductController::class, 'showProducts'])->name("showProducts");
 Route::get('/category/{cat}/{alias}', [ProductController::class, 'show'])->name("showProduct");
 Route::get('/category/{cat}', [ProductController::class, 'showCategory'])->name("showCategory");
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');
+Route::get('/cart/delete/{cart_product_id}', [CartController::class, 'deleteFromCart'])->name('cart.delete');
 
 
 
