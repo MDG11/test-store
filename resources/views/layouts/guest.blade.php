@@ -51,12 +51,11 @@
 											@if(Route::has('login'))
 												@auth
 													@if(Auth::user()->utype === 'ADM')
-														//Admin
-														<li><a href="/categories.html">My account {{ Auth::user()->name }}</a></li>
+														
+														
 														<li><a href="/product.html">Dashboard</a></li>
 													@else
-														//
-														<li><a href="/categories.html">My account {{ Auth::user()->name }}</a></li>
+														
 														<li><a href="/product.html">Dashboard</a></li>
 													@endif
 

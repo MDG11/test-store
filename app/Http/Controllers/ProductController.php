@@ -22,8 +22,15 @@ class ProductController extends Controller
     }
     public function showCategory(ProductFilter $request, $cat)
     {
-        $category = Category::where('alias',$cat)->first();
-        $products = Product::filter($request)->where('category_id',$category->id)->paginate(16);
-        return view('category.index', compact('category', 'products'));
+        $category = Category::where('alias', $cat)->first();
+        $file = $category->image;
+        $file_headers = @get_headers($file);
+        if (!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+            $exists = false;
+        } else {
+            $exists = true;
+        }
+        $products = Product::filter($request)->where('category_id', $category->id)->paginate(16);
+        return view('category.index', compact('category', 'products','exists'));
     }
 }

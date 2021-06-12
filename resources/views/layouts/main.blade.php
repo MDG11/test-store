@@ -39,25 +39,6 @@
 											<li><a href="{{ route('cart.index') }}">Cart</a></li>
 											<li><a href="/checkout.html">Check out</a></li>
 											<li><a href="/contact.html">Contact</a></li>
-											@if(Route::has('login'))
-												@auth
-													@if(Auth::user()->utype === 'ADM')
-														//Admin
-														<li><a href="/categories.html">My account {{ Auth::user()->name }}</a></li>
-														<li><a href="/product.html">Dashboard</a></li>
-													@else
-														//
-														<li><a href="/categories.html">My account {{ Auth::user()->name }}</a></li>
-														<li><a href="/product.html">Dashboard</a></li>
-													@endif
-
-												@else
-													
-												@endif
-												
-											@endif
-											<li><a href="{{ route('login') }}">Login</a></li>
-											<li><a href="{{ route('register') }}">Register</a></li>
 										</ul>
 									</li>
 									<li class="hassubs">
@@ -75,9 +56,11 @@
 										@if(Route::has('login'))
 												@auth
 													@if(Auth::user()->utype === 'ADM')
-														//Admin
-														<li><a href="/categories.html">My account {{ Auth::user()->name }}</a></li>
+														
+														
 														<li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+														<li><a href="{{ route('admin.categories') }}">Categories</a></li>
+														<li><a href="{{ route('admin.products') }}">Products</a></li>
 														<li><form id="logout_form" method="POST" action="{{route('logout')}}">
 														@csrf
 														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout_form').submit();">Logout</a>
@@ -85,7 +68,6 @@
 														</li>
 													@else
 														//
-														<li><a href="/categories.html">My account {{ Auth::user()->name }}</a></li>
 														<li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
 														<li><form id="logout_form" method="POST" action="{{route('logout')}}">
 														@csrf

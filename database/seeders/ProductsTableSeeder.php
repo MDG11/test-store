@@ -14,6 +14,8 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        for($i=0;$i<50;$i++){
         \App\Models\Product::factory()->create();
+    }
     }
 }
