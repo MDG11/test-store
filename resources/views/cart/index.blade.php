@@ -66,7 +66,7 @@
 						<!-- Name -->
 						<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
 							<div class="cart_item_image">
-								<div><img src="/images/{{ $image }}" alt=""></div>
+								<div><img src="/storage/uploads/productImages/{{ $image }}" alt=""></div>
 							</div>
 							<div class="cart_item_name_container">
 								<div class="cart_item_name"><a href="">{{ $product->name }}</a></div>
@@ -160,7 +160,13 @@
 								</li>
 							</ul>
 						</div>
-						<div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
+						<div class="button checkout_button">
+							@if (Auth::check())
+							<a href="{{ route('checkout') }}">Proceed to checkout</a>
+							@else
+							<a href="{{ route('login') }}">Proceed to checkout</a>
+							@endif
+						</div>
 					</div>
 				</div>
 			</div>

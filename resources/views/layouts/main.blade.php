@@ -31,18 +31,11 @@
 							<div class="logo"><a href="{{route('home')}}">Sublime.</a></div>
 							<nav class="main_nav">
 								<ul>
-									<li class="hassubs active">
+									<li class="active">
 										<a href="{{route('home')}}">Home</a>
-										<ul>
-											<li><a href="/categories.html">Categories</a></li>
-											<li><a href="/product.html">Product</a></li>
-											<li><a href="{{ route('cart.index') }}">Cart</a></li>
-											<li><a href="/checkout.html">Check out</a></li>
-											<li><a href="/contact.html">Contact</a></li>
-										</ul>
 									</li>
 									<li class="hassubs">
-										<a href="/categories.html">Categories</a>
+										<a href="{{ route('showProducts') }}">Categories</a>
 										<ul>
 										<li><a href="{{route('showProducts')}}">All products</a></li>
 										@foreach($categories as $category)
@@ -61,6 +54,7 @@
 														<li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
 														<li><a href="{{ route('admin.categories') }}">Categories</a></li>
 														<li><a href="{{ route('admin.products') }}">Products</a></li>
+														<li><a href="{{ route('admin.productimages') }}">Product Images</a></li>
 														<li><form id="logout_form" method="POST" action="{{route('logout')}}">
 														@csrf
 														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout_form').submit();">Logout</a>
@@ -85,7 +79,6 @@
 											
 										</ul>
 									</li>
-									<li><a href="/#">Offers</a></li>
 									<li><a href="/contact.html">Contact</a></li>
 								</ul>
 							</nav>

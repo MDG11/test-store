@@ -64,15 +64,15 @@
 						@endphp
 				<div class="col-lg-6">
 					<div class="details_image">
-						<div class="details_image_large"><img src="/images/{{$image}}" alt="{{$product->title}}"><div class="product_extra product_new"><a href="/categories.html">New</a></div></div>
+						<div class="details_image_large"><img src="/storage/uploads/productImages/{{ $image }}" alt="{{$product->title}}"><div class="product_extra product_new"><a href="/categories.html">New</a></div></div>
 						<div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
                         @if($image == 'No_img.png')
                         @else
                         @foreach($product->images as $img)
                             @if($loop->first)
-							<div class="details_image_thumbnail active" data-image="/images/{{$img['img']}}"><img src="/images/{{$img['img']}}" alt="{{$product->title}}"></div>
+							<div class="details_image_thumbnail active" data-image="/storage/uploads/productImages/{{$img['img']}}"><img src="/storage/uploads/productImages/{{$img['img']}}" alt="{{$product->title}}"></div>
                             @else
-                            <div class="details_image_thumbnail" data-image="/images/{{$img['img']}}"><img src="/images/{{$img['img']}}" alt="{{$product->title}}"></div>
+                            <div class="details_image_thumbnail" data-image="/storage/uploads/productImages/{{$img['img']}}"><img src="/storage/uploads/productImages/{{$img['img']}}" alt="{{$product->title}}"></div>
                             @endif
                         @endforeach
                         @endif

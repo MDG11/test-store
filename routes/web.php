@@ -4,12 +4,16 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Livewire\Admin\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\AdminAddProductComponent;
+use App\Http\Livewire\Admin\AdminAddProductImageComponent;
 use App\Http\Livewire\Admin\AdminCategoryComponent;
 use App\Http\Livewire\Admin\AdminEditCategoryComponent;
 use App\Http\Livewire\Admin\AdminEditProductComponent;
+use App\Http\Livewire\Admin\AdminEditProductImageComponent;
 use App\Http\Livewire\Admin\AdminProductComponent;
+use App\Http\Livewire\Admin\AdminProductImageComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +35,7 @@ Route::get('/category/{cat}', [ProductController::class, 'showCategory'])->name(
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');
 Route::get('/cart/delete/{cart_product_id}', [CartController::class, 'deleteFromCart'])->name('cart.delete');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 
 
@@ -50,4 +55,7 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function(){
         Route::get('/admin/products',AdminProductComponent::class )->name('admin.products');
         Route::get('admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
         Route::get('/admin/product/edit/{product_alias}', AdminEditProductComponent::class)->name('admin.editproduct');
+        Route::get('/admin/product-images', AdminProductImageComponent::class)->name('admin.productimages');
+        Route::get('/admin/product-image/add', AdminAddProductImageComponent::class)->name('admin.addproductimage');
+        Route::get('/admin/product-image/edit/{product_image_id}', AdminEditProductImageComponent::class)->name('admin.editproductimage');
 });

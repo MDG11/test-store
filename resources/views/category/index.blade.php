@@ -83,7 +83,7 @@
 						@endphp
 						<!-- Product -->
 						<div class="product">
-							<div class="product_image"><img src="/images/{{$image}}" alt="{{ $product->title }}"></div>
+							<div class="product_image"><img src="/storage/uploads/productImages/{{ $image }}" alt="{{ $product->title }}"></div>
 							<div class="product_content">
 								<div class="product_title"><a href="/{{route('showProduct',['cat'=>$product->category->alias, 'alias'=>$product->alias])}}">{{ $product->title }}</a></div>
 								@if($product->new_price != null)
