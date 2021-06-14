@@ -5,11 +5,15 @@ use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CouponController;
 use App\Http\Livewire\Admin\AdminAddCategoryComponent;
+use App\Http\Livewire\Admin\AdminAddCouponComponent;
 use App\Http\Livewire\Admin\AdminAddProductComponent;
 use App\Http\Livewire\Admin\AdminAddProductImageComponent;
 use App\Http\Livewire\Admin\AdminCategoryComponent;
+use App\Http\Livewire\Admin\AdminCouponsComponent;
 use App\Http\Livewire\Admin\AdminEditCategoryComponent;
+use App\Http\Livewire\Admin\AdminEditCouponComponent;
 use App\Http\Livewire\Admin\AdminEditProductComponent;
 use App\Http\Livewire\Admin\AdminEditProductImageComponent;
 use App\Http\Livewire\Admin\AdminProductComponent;
@@ -36,6 +40,10 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');
 Route::get('/cart/delete/{cart_product_id}', [CartController::class, 'deleteFromCart'])->name('cart.delete');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/couponapply', [CouponController::class, 'applyCoupon'])->name('applyCoupon');
+Route::post('/couponcancel', [CouponController::class, 'cancelCoupon'])->name('cancelCoupon');
+
+
 
 
 
@@ -58,4 +66,7 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function(){
         Route::get('/admin/product-images', AdminProductImageComponent::class)->name('admin.productimages');
         Route::get('/admin/product-image/add', AdminAddProductImageComponent::class)->name('admin.addproductimage');
         Route::get('/admin/product-image/edit/{product_image_id}', AdminEditProductImageComponent::class)->name('admin.editproductimage');
+        Route::get('/admin/coupons', AdminCouponsComponent::class)->name('admin.coupons');
+        Route::get('/admin/coupon/add', AdminAddCouponComponent::class)->name('admin.addcoupon');
+        Route::get('/admin/coupon/edit/{coupon_id}', AdminEditCouponComponent::class)->name('admin.editcoupon');
 });

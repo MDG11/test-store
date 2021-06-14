@@ -10,6 +10,9 @@
 @endsection
 @section('content')
 	<!-- Home -->
+	@if(Session::has('coupon_success__message'))
+    	<div class="alert alert-danger" role="alert">{{Session::get('coupon_success_message')}}</div>
+    @endif
 @if(count($cart_products))
 	<div class="home">
 		<div class="home_container">
@@ -128,16 +131,41 @@
 					</div>
 
 					<!-- Coupon Code -->
+					@if (!Cart::content()->first()->options->coupon_id)
+						
 					<div class="coupon">
+						
 						<div class="section_title">Coupon code</div>
 						<div class="section_subtitle">Enter your coupon code</div>
 						<div class="coupon_form_container">
-							<form action="#" id="coupon_form" class="coupon_form">
-								<input type="text" class="coupon_input" required="required">
+						@if(Session::has('coupon_message'))
+                            <div class="alert alert-danger" role="alert">{{Session::get('coupon_message')}}</div>
+                        @endif
+							<form action="{{ route('applyCoupon') }}" method="POST" id="coupon_form" class="coupon_form">
+								@csrf
+								<input type="text" name="couponCode" class="coupon_input" required="required">
 								<button class="button coupon_button"><span>Apply</span></button>
 							</form>
 						</div>
 					</div>
+					@else
+					<div class="coupon">
+						
+						<div class="section_title">Coupon code</div>
+						<div class="section_subtitle">Your coupon code</div>
+						<div class="coupon_form_container">
+						@if(Session::has('coupon_message'))
+                            <div class="alert alert-danger" role="alert">{{Session::get('coupon_message')}}</div>
+                        @endif
+							<form action="{{ route('cancelCoupon') }}" method="POST" id="coupon_form" class="coupon_form">
+								@csrf
+
+								<input readonly type="text" name="coupon_id" value="{{ Cart::content()->first()->options->coupon_id }}" class="coupon_input" required="required">
+								<button class="button coupon_button"><span>Cancel coupon</span></button>
+							</form>
+						</div>
+					</div>
+					@endif
 				</div>
 
 				<div class="col-lg-6 offset-lg-2">

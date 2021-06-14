@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupon;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -23,8 +24,19 @@ class CartController extends Controller
         if(!isset($currentprod->new_price)){
             $price = $currentprod->price;
         } else $price = $currentprod->new_price;
-        Cart::add($currentprod->id, $currentprod->title, 1, $price);
-
+        Cart::add($currentprod->id, $currentprod->title, 1, $price, ['is_discounted' => false]);
+        foreach(Cart::content() as $cartItem)
+        {
+            $coupon = Coupon::find($cartItem->options->coupon_id);
+        if($coupon){
+            if($coupon->type == 'percent' && $cartItem->options->is_discounted == true){
+                Cart::update($cartItem->rowId, ['price' => (($cartItem->price/(100-$coupon->value))*100), 'options'=>['is_discounted' => false]]);
+                }elseif($cartItem->options->is_discounted == true)
+                {
+                Cart::update($cartItem->rowId, ['price' => ($cartItem->price+$coupon->value), 'options'=>['is_discounted' => false]]);
+                }
+            }
+        }
         return redirect()->back()->with(['success' => 'Product Added To Cart Successfully']);
 
     }

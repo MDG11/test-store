@@ -12,11 +12,9 @@
 		<div class="home_slider_container">
 			
 			<!-- Home Slider -->
-			<div class="owl-carousel owl-theme home_slider">
 				
 				<!-- Slider Item -->
-				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
+					<div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg); margin:3.1vw; max-width: 93.15vw"></div>
 					<div class="home_slider_content_container">
 						<div class="container">
 							<div class="row">
@@ -30,69 +28,13 @@
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<!-- Slider Item -->
-				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
-					<div class="home_slider_content_container">
-						<div class="container">
-							<div class="row">
-								<div class="col">
-									<div class="home_slider_content"  data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
-										<div class="home_slider_title">A new Online Shop experience.</div>
-										<div class="home_slider_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</div>
-										<div class="button button_light home_button"><a href="#">Shop Now</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Slider Item -->
-				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
-					<div class="home_slider_content_container">
-						<div class="container">
-							<div class="row">
-								<div class="col">
-									<div class="home_slider_content"  data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
-										<div class="home_slider_title">A new Online Shop experience.</div>
-										<div class="home_slider_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</div>
-										<div class="button button_light home_button"><a href="#">Shop Now</a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<!-- Home Slider Dots -->
-			
-			<div class="home_slider_dots_container">
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<div class="home_slider_dots">
-								<ul id="home_slider_custom_dots" class="home_slider_custom_dots">
-									<li class="home_slider_custom_dot active">01.</li>
-									<li class="home_slider_custom_dot">02.</li>
-									<li class="home_slider_custom_dot">03.</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>	
-			</div>
-
 		</div>
 	</div>
 
 	<!-- Ads -->
+	<div class="avds" style="height: 2vh;">
 
+	</div>
 	<div class="avds">
 		<div class="avds_container d-flex flex-lg-row flex-column align-items-start justify-content-between">
 			<div class="avds_small">
@@ -133,17 +75,20 @@
 			<div class="row">
 				<div class="col">
 					
-					<div class="product_grid">
+					<div class="product_grid" style="position: relative; height: 884.8px;"	>
 						@foreach($products as $product)
 						@php
 						    $image = '';
 						    if(count($product->images)>0){
 
 								$image = $product->images[0]['img'];
-							} else $image = 'No_img.png'
+							} else $image = 'No_img.png';
+
+							$position_horizontal = 0 + (292 * ($loop->index%4));
+							$position_vertical = 0 + (442 * intval($loop->index/4));
 						@endphp
 						<!-- Product -->
-						<div class="product">
+						<div class="product" style="position: absolute; left: {{ $position_horizontal }}px; top: {{ $position_vertical }}px;">
 							<div class="product_image"><img src="/storage/uploads/productImages/{{ $image }}" alt="{{ $product->title }}"></div>
 							<div class="product_extra product_new"><a href="{{route('showCategory', ['cat'=>$product->category['alias']])}}">{{$product->category['title']}}</a></div>
 							<div class="product_content">

@@ -15,6 +15,10 @@ class CreateCouponsTable extends Migration
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
+            $table->enum('type', ['fixed','percent']);
+            $table->decimal('value');
+            $table->decimal('cart_value');
             $table->timestamps();
         });
     }

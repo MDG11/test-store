@@ -67,7 +67,7 @@
 			<div class="row">
 				<div class="col">
 
-					<div class="product_grid">
+					<div class="product_grid" style="position: relative; height: 1627.2px;">
 
                     @foreach($products as $product)
 						@php
@@ -75,14 +75,17 @@
 						    if(count($product->images)>0){
 
 								$image = $product->images[0]['img'];
-							} else $image = 'No_img.png'
+							} else $image = 'No_img.png';
+
+							$position_horizontal = 0 + (292 * ($loop->index%4));
+							$position_vertical = 0 + (442 * intval($loop->index/4));
 						@endphp
 						<!-- Product -->
-						<div class="product">
+						<div class="product" style="position: absolute; left: {{ $position_horizontal }}px; top: {{ $position_vertical }}px;">
 							<div class="product_image"><img src="/storage/uploads/productImages/{{$image}}" alt="{{ $product->title }}"></div>
 							<div class="product_extra product_new"><a href="{{route('showCategory', ['cat'=>$product->category['alias']])}}">{{$product->category['title']}}</a></div>
 							<div class="product_content">
-								<div class="product_title"><a href="{{route('showProduct',['cat'=>'$product->category->alias', 'alias'=>$product->alias])}}">{{ $product->title }}</a></div>
+								<div class="product_title"><a href="{{route('showProduct',['cat'=>$product->category->alias, 'alias'=>$product->alias])}}">{{ $product->title }}</a></div>
 								@if($product->new_price != null)
 								<div style="text-decoration: line-through; color: red;padding-top:5%;">${{ $product->price}}</div>
 								<div class="product_price">${{ $product->new_price}}</div>
