@@ -42,6 +42,7 @@ Route::get('/cart/delete/{cart_product_id}', [CartController::class, 'deleteFrom
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/couponapply', [CouponController::class, 'applyCoupon'])->name('applyCoupon');
 Route::post('/couponcancel', [CouponController::class, 'cancelCoupon'])->name('cancelCoupon');
+Route::post('/order/place', [CheckoutController::class, 'placeOrder'])->name('order.place');
 
 
 

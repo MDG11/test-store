@@ -88,7 +88,7 @@
 						<div class="product" style="position: absolute; left: {{ $position_horizontal }}px; top: {{ $position_vertical }}px;">
 							<div class="product_image"><img src="/storage/uploads/productImages/{{ $image }}" alt="{{ $product->title }}"></div>
 							<div class="product_content">
-								<div class="product_title"><a href="/{{route('showProduct',['cat'=>$product->category->alias, 'alias'=>$product->alias])}}">{{ $product->title }}</a></div>
+								<div class="product_title"><a href="{{route('showProduct',['cat'=>$product->category->alias, 'alias'=>$product->alias])}}">{{ $product->title }}</a></div>
 								@if($product->new_price != null)
 								<div style="text-decoration: line-through; color: red;padding-top:5%;">${{ $product->price}}</div>
 								<div class="product_price">${{ $product->new_price}}</div>
