@@ -34,8 +34,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Coupon Type</label>
-                                <div class="col-md-4" wire:model="type">
-                                    <select class="form-control">
+                                <div class="col-md-4" >
+                                    <select class="form-control" wire:model="type">
                                         <option value="">Select</option>
                                         <option value="fixed">Fixed</option>
                                         <option value="percent">Percent</option>
@@ -55,11 +55,27 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-md-4 control-label">Expiry Date</label>
+                                <div class="col-md-4">
+                                    <input type="date" id="expiry-date" name="title" class="form-control input-md" wire:model="expiry_date">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
+                            @if ($errors->any())
+                             <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                 </ul>
+                             </div>
+                            @endif
+
                             </form>
                         </div>
                     </div>

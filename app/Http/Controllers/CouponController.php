@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coupon;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class CouponController extends Controller
 {
     public function applyCoupon(Request $request){
         $total = floatval(str_replace(',','',Cart::subtotal())); // convert cart total to comparable float 
-        $coupon = Coupon::where('code','=',$request->couponCode)->where('cart_value','<=',$total)->first();
+        $coupon = Coupon::where('code','=',$request->couponCode)->where('cart_value','<=',$total)->where('expiry_date','>=',Carbon::today())->first();
         if(!$coupon){
             return redirect()->back()->with('coupon_message','Invalid code!');
         }
