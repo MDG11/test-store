@@ -108,13 +108,13 @@
                     <div class="order_list_container">
                         <div class="order_list_bar d-flex flex-row align-items-center justify-content-start">
                             <div class="order_list_title">Product</div>
-                            <div class="order_list_value ml-auto">Total(With tax)</div>
+                            <div class="order_list_value ml-auto">Total</div>
                         </div>
                         <ul class="order_list">
-                            @foreach (Cart::content() as $cartItem)
+                            @foreach (Cart::instance()->content() as $cartItem)
                             <li class="d-flex flex-row align-items-center justify-content-start">
                                 <div class="order_list_title">{{ $cartItem->name }}</div>
-                                <div class="order_list_value ml-auto">$ {{ $cartItem->total }}</div>
+                                <div class="order_list_value ml-auto">$ {{ $cartItem->price }}</div>
                             </li>
                             @endforeach
                             
@@ -125,6 +125,10 @@
                             <li class="d-flex flex-row align-items-center justify-content-start">
                                 <div class="order_list_title">Total</div>
                                 <div class="order_list_value ml-auto">$ {{ Cart::total() }}</div>
+                            </li>
+                            <li class="d-flex flex-row align-items-center justify-content-start">
+                                <div class="order_list_title">Delivery</div>
+                                <div class="order_list_value ml-auto">$ {{ Cart::instance('delivery')->content()->first()->price }}</div>
                             </li>
                         </ul>
                     </div>

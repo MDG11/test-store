@@ -13,18 +13,19 @@ class CartController extends Controller
     {
         $cart_products = Cart::content();
         $cart_total = Cart::total();
+        $products = Product::all();
         $pretotal = 0;
         foreach($cart_products as $product) $pretotal += $product->price;
         $pretotal = number_format($pretotal, 2, ',', '.');
-        return view('cart.index', compact('cart_products','cart_total','pretotal'));
+        return view('cart.index', compact('cart_products','cart_total','pretotal','products'));
     }
-    public function addToCart($product_id){
+    public function addToCart(Request $request, $product_id){
         $currentprod = Product::where('id',$product_id)->first();
         $price = 0;
         if(!isset($currentprod->new_price)){
             $price = $currentprod->price;
         } else $price = $currentprod->new_price;
-        Cart::add($currentprod->id, $currentprod->title, 1, $price, ['is_discounted' => false]);
+        Cart::add($currentprod->id, $currentprod->title, $request->qty, $price, ['is_discounted' => false]);
         foreach(Cart::content() as $cartItem)
         {
             $coupon = Coupon::find($cartItem->options->coupon_id);
@@ -39,6 +40,10 @@ class CartController extends Controller
         }
         return redirect()->back()->with(['success' => 'Product Added To Cart Successfully']);
 
+    }
+    public function clearCart(){
+        Cart::destroy();
+        return redirect()->back()->with(['success' => 'Product Added To Cart Successfully']);
     }
     public function deleteFromCart($cart_product_id)
     {

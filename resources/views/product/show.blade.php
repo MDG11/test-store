@@ -105,20 +105,20 @@
 						</div>
 
 						<!-- Product Quantity -->
+						<form method="POST" id="addcart-form" action="{{ route('cart.store',['product_id' => $product->id,]) }}">
+							@csrf
 						<div class="product_quantity_container">
 							<div class="product_quantity clearfix">
 								<span>Qty</span>
-								<input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+								<input id="quantity_input" name="qty" type="text" pattern="[0-9]*" value="1" required>
 								<div class="quantity_buttons">
 									<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
 									<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
 								</div>
 							</div>
-							<div class="button cart_button"><a href="{{ route('cart.store',[
-								'product_id' => $product->id,
-							]) }}">Add to cart</a></div>
+							<button type="submit" class="btn btn-success" style="height: 6vh; width:10vw; margin-left:3vw; font-size:24px">Add to cart</button>
 						</div>
-
+					</form>
 						<!-- Share -->
 						<div class="details_share">
 							<span>Share:</span>

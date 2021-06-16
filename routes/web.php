@@ -37,13 +37,16 @@ Route::get('/all-products', [ProductController::class, 'showProducts'])->name("s
 Route::get('/category/{cat}/{alias}', [ProductController::class, 'show'])->name("showProduct");
 Route::get('/category/{cat}', [ProductController::class, 'showCategory'])->name("showCategory");
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::get('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');
 Route::get('/cart/delete/{cart_product_id}', [CartController::class, 'deleteFromCart'])->name('cart.delete');
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/cart/cleat', [CartController::class, 'clearCart'])->name('clearCart');
+Route::post('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/couponapply', [CouponController::class, 'applyCoupon'])->name('applyCoupon');
 Route::post('/couponcancel', [CouponController::class, 'cancelCoupon'])->name('cancelCoupon');
 Route::post('/order/place', [CheckoutController::class, 'placeOrder'])->name('order.place');
-
+Route::get('/checkout/card', [CheckoutController::class, 'card'])->name('order.checkout');
+Route::post('/checkout/card/proceed/{order_id}', [CheckoutController::class, 'proceed_payment'])->name('proceed.payment');
+Route::get('/thankyou', [CheckoutController::class, 'thank'])->name('thankyou');
 
 
 
