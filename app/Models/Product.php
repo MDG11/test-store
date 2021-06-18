@@ -17,6 +17,9 @@ class Product extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+    public function reviews(){
+        return $this->hasMany(ProductReview::class);
+    }
     public function scopeFilter(Builder $builder, QueryFilter $filter){
         return $filter->apply($builder);
     }

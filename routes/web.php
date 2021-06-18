@@ -40,6 +40,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/all-products', [ProductController::class, 'showProducts'])->name("showProducts");
 Route::get('/category/{cat}/{alias}', [ProductController::class, 'show'])->name("showProduct");
 Route::get('/category/{cat}', [ProductController::class, 'showCategory'])->name("showCategory");
+Route::post('/product/{product_id}/review/post', [ProductController::class, 'postReview'])->name('review.post');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');
 Route::get('/cart/delete/{cart_product_id}', [CartController::class, 'deleteFromCart'])->name('cart.delete');
@@ -51,13 +52,6 @@ Route::post('/order/place', [CheckoutController::class, 'placeOrder'])->name('or
 Route::get('/checkout/card', [CheckoutController::class, 'card'])->name('order.checkout');
 Route::post('/checkout/card/proceed/{order_id}', [CheckoutController::class, 'proceed_payment'])->name('proceed.payment');
 Route::get('/thankyou', [CheckoutController::class, 'thank'])->name('thankyou');
-
-
-
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
 //For User
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
