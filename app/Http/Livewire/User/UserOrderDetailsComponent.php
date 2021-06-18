@@ -6,6 +6,7 @@ use App\Models\Order;
 use Livewire\Component;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserOrderDetailsComponent extends Component
 {
@@ -14,6 +15,15 @@ class UserOrderDetailsComponent extends Component
     public function mount($order_id){
         $this->order_id = $order_id;
     }
+    
+    public function cancelOrder(){
+        $order = Order::find($this->order_id);
+        $order->status = "cancelled";
+        $order->cancelled_date = DB::raw('CURRENT_DATE');
+        $order->save();
+        session()->flash('order_message', 'Order has been cancelled successfully!');
+    }
+
     public function render()
     {
         $order = Order::where('user_id',Auth::user()->id)->where('id',$this->order_id)->first();

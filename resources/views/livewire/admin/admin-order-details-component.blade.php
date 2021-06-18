@@ -5,12 +5,42 @@
         }
     </style>
     <div class="container" style="padding: 30px 0;">
+        
         <div class="row">
             <div class="col-md-6">
                 Ordered Items
             </div>
             <div class="col-md-6">
                 <a href="{{ route('admin.orders') }}" class="btn btn-success pull-right">All orders</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 style="text-align: center;">Order Details</h1>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <th>Order Id</th>
+                                <td>{{ $order->id }}</td>
+                                <th>Order Date</th>
+                                <td>{{ $order->created_at }}</td>
+                                <th>Order Status</th>
+                                <td>{{ $order->status }}</td>
+                                @if ($order->status == "delivered")
+                                <th>Order Delivered Date</th>
+                                <td>{{ $order->delivered_date }}</td>
+                                @elseif ($order->status =="cancelled")
+                                <th>Order Cancelation Date</th>
+                                <td>{{ $order->cancelled_date }}</td>
+                                @endif
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
             </div>
         </div>
         <div class="row">

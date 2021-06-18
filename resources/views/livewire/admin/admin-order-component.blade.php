@@ -17,6 +17,9 @@
                         </div>
                         <div class="panel-body">
                             <div class="table table-striped">
+                                @if (Session::has('order_message'))
+                                    <div role="alert" class="alert alert-success">{{ Session::get('order_message') }}</div>
+                                @endif
                              <table>
                                 <thead>
                                     <tr>
@@ -32,7 +35,7 @@
                                         <th>Zipcode</th>
                                         <th>Status</th>
                                         <th>Order Date</th>
-                                        <th>Action</th>
+                                        <th colspan="2" class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,7 +53,20 @@
                                             <td>{{ $order->zipcode }}</td>
                                             <td>{{ $order->status }}</td>
                                             <td>{{ $order->created_at }}</td>
-                                            <td><a class="btn btn-info btn-sm" href="{{ route('admin.orderdetails', ['order_id' => $order->id]) }}">Details</a></td>
+                                            <td>
+                                                <a class="btn btn-info btn-sm" href="{{ route('admin.orderdetails', ['order_id' => $order->id]) }}">Details</a>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-success button-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                                                        <span class="caret">Status</span></button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="" wire:click.prevent="updateOrderStatus({{ $order->id }}, 'delivered')">Delivered</a></li>
+                                                            <li><a href="" wire:click.prevent="updateOrderStatus({{ $order->id }}, 'cancelled')">Cancelled</a></li>
+                                                        </ul>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
