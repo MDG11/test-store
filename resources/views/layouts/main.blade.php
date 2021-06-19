@@ -57,6 +57,7 @@
 														<li><a href="{{ route('admin.productimages') }}">Product Images</a></li>
 														<li><a href="{{ route('admin.coupons') }}">Coupons</a></li>
 														<li><a href="{{ route('admin.orders') }}">Orders</a></li>
+														<li><a href="{{ route('admin.sendemail') }}">Send Email</a></li>
 														<li><form id="logout_form" method="POST" action="{{route('logout')}}">
 														@csrf
 														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout_form').submit();">Logout</a>

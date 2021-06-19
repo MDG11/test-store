@@ -11,30 +11,32 @@
         $(function() {
             $("#tabs").tabs();
         });
-		$(function() {
-    // Multiple images preview in browser
-    var imagesPreview = function(input, placeToInsertImagePreview) {
+        $(function() {
+            // Multiple images preview in browser
+            var imagesPreview = function(input, placeToInsertImagePreview) {
 
-        if (input.files) {
-            var filesAmount = input.files.length;
+                if (input.files) {
+                    var filesAmount = input.files.length;
 
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
 
-                reader.onload = function(event) {
-                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(
+                                placeToInsertImagePreview);
+                        }
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
                 }
 
-                reader.readAsDataURL(input.files[i]);
-            }
-        }
+            };
 
-    };
+            $('#images_load').on('change', function() {
+                imagesPreview(this, 'div.gallery');
+            });
+        });
 
-    $('#images_load').on('change', function() {
-        imagesPreview(this, 'div.gallery');
-    });
-});
     </script>
 @endsection
 
@@ -200,9 +202,9 @@
                             <p>{{ $product->description }}</p>
                         </div>
                         <div id="tabs-2">
-							@if (Session::has('comment-message'))
-								<div class="alert alert-success" role="alert">{{Session::get('comment-message')}}</div>
-							@endif
+                            @if (Session::has('comment-message'))
+                                <div class="alert alert-success" role="alert">{{ Session::get('comment-message') }}</div>
+                            @endif
                             @if (count($product->reviews))
                                 <div class="container">
                                     <div class="be-comment-block">
@@ -231,7 +233,8 @@
                                                     </div>
                                                     <div class="be-comment-images">
                                                         @foreach ($review->images as $review_image)
-                                                            <img style="padding-right:5px;" class="review_image" src="/storage/uploads/reviewImages/{{ $review_image->img }}">
+                                                            <img onclick="window.open($(this)[0].src, '_blank')" style="padding-right:5px; cursor: pointer;" class="review_image"
+                                                                src="/storage/uploads/reviewImages/{{ $review_image->img }}">
                                                         @endforeach
                                                     </div>
                                                     <p class="be-comment-text">
@@ -239,74 +242,77 @@
                                                     </p>
                                                 </div>
                                             </div>
-											<hr>	
+                                            <hr>
                                         @endforeach
-                                        <form method="POST" action="{{ route('review.post',['product_id' => $product->id]) }}" style="padding-top:5vh;" class="form-block" enctype="multipart/form-data">
-                                           @csrf
-											<div class="row">
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <div class="form-group fl_icon">
-                                                        <div class="icon"><i class="fa fa-user"></i></div>
-                                                        <input required name="username" class="form-input" type="text"
-                                                            placeholder="Your name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-6 fl_icon">
-                                                    <div class="form-group">
-                                                        <input required name="header" class="form-input" type="text" placeholder="Review header">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <div class="form-group">
-                                                        <input name="images[]" class="form-input" id="images_load" type="file" multiple>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-6">
-                                                    <div class="form-group">
-                                                        <input type="radio" id="star5" name="rate" value="5" />
-                                                        <label for="star5" title="text">5 stars</label>
-                                                        <input type="radio" id="star4" name="rate" value="4" />
-                                                        <label for="star4" title="text">4 stars</label>
-                                                        <input type="radio" id="star3" name="rate" value="3" />
-                                                        <label for="star3" title="text">3 stars</label>
-                                                        <input type="radio" id="star2" name="rate" value="2" />
-                                                        <label for="star2" title="text">2 stars</label>
-                                                        <input type="radio" id="star1" name="rate" value="1" />
-                                                        <label for="star1" title="text">1 star</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-											<div class="row">
-												<div id="loaded_images_preview">
-													<div class="gallery"></div>
-												</div>
-											</div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <textarea required name="body" class="form-input"	
-                                                            placeholder="Your text"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <button type="submit" style="color: white;" class="btn btn-primary pull-right">Submit</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                    @else
+                                        <div>
+                                            <h1 style="text-align: center;">No comments by now!</h1>
+                                        </div>
+                                    @endif
+                            <form method="POST" action="{{ route('review.post', ['product_id' => $product->id]) }}"
+                                style="padding-top:5vh;" class="form-block" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group fl_icon">
+                                            <div class="icon"><i class="fa fa-user"></i></div>
+                                            <input required name="username" class="form-input" type="text"
+                                                placeholder="Your name">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 fl_icon">
+                                        <div class="form-group">
+                                            <input required name="header" class="form-input" type="text"
+                                                placeholder="Review header">
+                                        </div>
                                     </div>
                                 </div>
-                            @else
-                                <div>
-                                    <h1 style="text-align: center;">No comments by now!</h1>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <input name="images[]" class="form-input" id="images_load" type="file" multiple>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <input type="radio" id="star5" name="rate" value="5" />
+                                            <label for="star5" title="text">5 stars</label>
+                                            <input type="radio" id="star4" name="rate" value="4" />
+                                            <label for="star4" title="text">4 stars</label>
+                                            <input type="radio" id="star3" name="rate" value="3" />
+                                            <label for="star3" title="text">3 stars</label>
+                                            <input type="radio" id="star2" name="rate" value="2" />
+                                            <label for="star2" title="text">2 stars</label>
+                                            <input type="radio" id="star1" name="rate" value="1" />
+                                            <label for="star1" title="text">1 star</label>
+                                        </div>
+                                    </div>
                                 </div>
-                            @endif
+                                <div class="row">
+                                    <div id="loaded_images_preview">
+                                        <div class="gallery"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea required name="body" class="form-input"
+                                                placeholder="Your text"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" style="color: white;"
+                                            class="btn btn-primary pull-right">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
     <!-- Products -->
@@ -322,45 +328,33 @@
                 <div class="col">
 
                     <div class="product_grid">
-
+                        @for ($i=0;$i<4;$i++)
+                        @php
+                        if ($i==0) {
+                            $id = rand(0 ,count($product->category->products)-4);
+                        }
+                        elseif($id<count($product->category->products)) {
+                            $id++;
+                        }
+                        $similarProduct = $product->category->products[$id];
+                        $image = '';
+                            if (count($similarProduct->images) > 0) {
+                                $image = $similarProduct->images[0]['img'];
+                            } else {
+                                $image = 'No_img.png';
+                            }
+                        @endphp
                         <!-- Product -->
                         <div class="product">
-                            <div class="product_image"><img src="/images/product_1.jpg" alt=""></div>
-                            <div class="product_extra product_new"><a href="/categories.html">New</a></div>
+                            <div class="product_image"><img src="/storage/uploads/productImages/{{ $image }}" alt="{{ $similarProduct->title }}"></div>
+                            <div class="product_extra product_new"><a href="{{ route('showCategory',['cat' => $similarProduct->category->alias]) }}">{{ $similarProduct->category->title }}</a></div>
                             <div class="product_content">
-                                <div class="product_title"><a href="/product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
+                                <div class="product_title"><a href="{{ route('showProduct',['cat' => $similarProduct->category->alias, 'alias' => $similarProduct->alias]) }}">{{ $similarProduct->title }}</a></div>
+                                <div class="product_price">{{ $similarProduct->price }}</div>
                             </div>
                         </div>
 
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="/images/product_2.jpg" alt=""></div>
-                            <div class="product_extra product_sale"><a href="/categories.html">Sale</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="/product.html">Smart Phone</a></div>
-                                <div class="product_price">$520</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="/images/product_3.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="/product.html">Smart Phone</a></div>
-                                <div class="product_price">$710</div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product">
-                            <div class="product_image"><img src="/images/product_4.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="/product.html">Smart Phone</a></div>
-                                <div class="product_price">$330</div>
-                            </div>
-                        </div>
-
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -385,9 +379,17 @@
                                 molestie eros</p>
                         </div>
                         <div class="newsletter_form_container">
-                            <form action="#" id="newsletter_form" class="newsletter_form">
-                                <input type="email" class="newsletter_input" required="required">
-                                <button class="newsletter_button trans_200"><span>Subscribe</span></button>
+                            @if (Session::has('subscribed-message'))
+                                <div class="alert alert-success">{{ Session::get('subscribed-message') }}</div>
+                            @elseif (Session::has('subscriber'))
+                                <div class="alert alert-danger">
+                                    You are already subscribed, <a href="{{ route('subscription.stop', ['email' => Session::get('subscriber')]) }}">cancel subscription?</a>
+                                </div>
+                            @endif
+                            <form method="POST" action="{{ route('subscription.start') }}" id="newsletter_form" class="newsletter_form">
+                                @csrf
+                                <input type="email" name="email" class="newsletter_input" required>
+                                <button class="newsletter_button trans_200" type="submit"><span>Subscribe</span></button>
                             </form>
                         </div>
                     </div>

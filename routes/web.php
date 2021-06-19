@@ -20,6 +20,7 @@ use App\Http\Livewire\Admin\AdminOrderComponent;
 use App\Http\Livewire\Admin\AdminOrderDetailsComponent;
 use App\Http\Livewire\Admin\AdminProductComponent;
 use App\Http\Livewire\Admin\AdminProductImageComponent;
+use App\Http\Livewire\Admin\AdminSendEmailComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserOrderDetailsComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
@@ -52,6 +53,8 @@ Route::post('/order/place', [CheckoutController::class, 'placeOrder'])->name('or
 Route::get('/checkout/card', [CheckoutController::class, 'card'])->name('order.checkout');
 Route::post('/checkout/card/proceed/{order_id}', [CheckoutController::class, 'proceed_payment'])->name('proceed.payment');
 Route::get('/thankyou', [CheckoutController::class, 'thank'])->name('thankyou');
+Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscription.start');
+Route::get('/subscribe/cancel/{email}', [HomeController::class, 'subscribeCancel'])->name('subscription.stop');
 //For User
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
@@ -60,30 +63,32 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         Route::get('/user/orders/{order_id}', UserOrderDetailsComponent::class)->name('user.orderdetails');
 });
 //For Admin
-Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function(){
-        Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
+Route::middleware(['auth:sanctum', 'verified','authadmin'])->prefix('admin')->group(function(){
+        Route::get('dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
         
         
-        Route::get('/admin/categories', AdminCategoryComponent::class)->name('admin.categories');
-        Route::get('/admin/category/add', AdminAddCategoryComponent::class)->name('admin.addcategory');
-        Route::get('/admin/category/edit/{category_slug}', AdminEditCategoryComponent::class)->name('admin.editcategory');
+        Route::get('categories', AdminCategoryComponent::class)->name('admin.categories');
+        Route::get('category/add', AdminAddCategoryComponent::class)->name('admin.addcategory');
+        Route::get('category/edit/{category_slug}', AdminEditCategoryComponent::class)->name('admin.editcategory');
         
         
-        Route::get('/admin/products',AdminProductComponent::class )->name('admin.products');
-        Route::get('admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
-        Route::get('/admin/product/edit/{product_alias}', AdminEditProductComponent::class)->name('admin.editproduct');
+        Route::get('products',AdminProductComponent::class )->name('admin.products');
+        Route::get('product/add', AdminAddProductComponent::class)->name('admin.addproduct');
+        Route::get('product/edit/{product_alias}', AdminEditProductComponent::class)->name('admin.editproduct');
         
         
-        Route::get('/admin/product-images', AdminProductImageComponent::class)->name('admin.productimages');
-        Route::get('/admin/product-image/add', AdminAddProductImageComponent::class)->name('admin.addproductimage');
-        Route::get('/admin/product-image/edit/{product_image_id}', AdminEditProductImageComponent::class)->name('admin.editproductimage');
+        Route::get('product-images', AdminProductImageComponent::class)->name('admin.productimages');
+        Route::get('product-image/add', AdminAddProductImageComponent::class)->name('admin.addproductimage');
+        Route::get('product-image/edit/{product_image_id}', AdminEditProductImageComponent::class)->name('admin.editproductimage');
         
         
-        Route::get('/admin/coupons', AdminCouponsComponent::class)->name('admin.coupons');
-        Route::get('/admin/coupon/add', AdminAddCouponComponent::class)->name('admin.addcoupon');
-        Route::get('/admin/coupon/edit/{coupon_id}', AdminEditCouponComponent::class)->name('admin.editcoupon');
+        Route::get('coupons', AdminCouponsComponent::class)->name('admin.coupons');
+        Route::get('coupon/add', AdminAddCouponComponent::class)->name('admin.addcoupon');
+        Route::get('coupon/edit/{coupon_id}', AdminEditCouponComponent::class)->name('admin.editcoupon');
         
         
-        Route::get('/admin/orders/', AdminOrderComponent::class)->name('admin.orders');
-        Route::get('/admin/orders/{order_id}', AdminOrderDetailsComponent::class)->name('admin.orderdetails');
+        Route::get('orders/', AdminOrderComponent::class)->name('admin.orders');
+        Route::get('orders/{order_id}', AdminOrderDetailsComponent::class)->name('admin.orderdetails');
+
+        Route::get('sendemail', AdminSendEmailComponent::class)->name('admin.sendemail');
 });
