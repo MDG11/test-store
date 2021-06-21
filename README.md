@@ -11,7 +11,7 @@ HTML,CSS,JavaScript,PHP,Laravel,MySQL,Livewire,JQuery,Stripe API,Bootstrap
     <li>Reviews</li>
     <li>Engeneered RESTful API for external management</li>
 </ul>
-## Todo
+<h1>ToDO</h1>
 <ul>
     <li>Paypal integrate</li>
     <li>Better filtering/search</li>
