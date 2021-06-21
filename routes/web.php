@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\ProfilePersonalsController;
 use App\Http\Controllers\SharesController;
 use App\Http\Livewire\Admin\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\AdminAddCouponComponent;
@@ -57,6 +58,9 @@ Route::get('/facebook', [SharesController::class, 'facebook'])->name('share.face
 
 //For User
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+        Route::get('/profile/edit', [ProfilePersonalsController::class, 'index'])->name('profile.index');
+        Route::put('/profile/edit', [ProfilePersonalsController::class, 'update'])->name('profile.update');
+        Route::post('/profile/edit', [ProfilePersonalsController::class, 'create'])->name('profile.create');
         Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
         Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
         Route::post('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');

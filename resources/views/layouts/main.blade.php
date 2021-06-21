@@ -64,6 +64,7 @@
 														</li>
 													@else
 														<li><a href="{{ route('user.orders') }}">Orders</a></li>
+														<li><a href="{{ route('profile.index') }}">Profile</a></li>
 														<li><form id="logout_form" method="POST" action="{{route('logout')}}">
 														@csrf
 														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout_form').submit();">Logout</a>

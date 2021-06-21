@@ -49,49 +49,59 @@
                                 <div class="col-xl-6">
                                     <!-- Name -->
                                     <label for="checkout_name">First Name*</label>
-                                    <input type="text" name="f_name" id="checkout_name" class="checkout_input" required>
+                                    <input type="text" name="f_name" id="checkout_name" class="checkout_input" required
+                                    value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->firstname }}">
                                 </div>
                                 <div class="col-xl-6 last_name_col">
                                     <!-- Last Name -->
                                     <label for="checkout_last_name">Last Name*</label>
-                                    <input type="text" name="l_name" id="checkout_last_name" class="checkout_input" required>
+                                    <input type="text" name="l_name" id="checkout_last_name" class="checkout_input" required
+                                    value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->lastname }}">
                                 </div>
                             </div>
                             <div>
                                 <!-- Country -->
                                 <label for="checkout_country">Country*</label>
-                                <input type="text" name="checkout_country" id="checkout_country" class="checkout_input" required>
+                                <input type="text" name="checkout_country" id="checkout_country" class="checkout_input" required
+                                value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->country }}">
                             </div>
                             <div>
                                 <!-- Address -->
                                 <label for="checkout_address">Address*</label>
-                                <input type="text" id="checkout_address" name="checkout_address" class="checkout_input" required>
-                                <input type="text" id="checkout_address_2" name="checkout_address_2" class="checkout_input checkout_address_2">
+                                <input type="text" id="checkout_address" name="checkout_address" class="checkout_input" required
+                                value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->adress_line_1 }}">
+                                <input type="text" id="checkout_address_2" name="checkout_address_2" class="checkout_input checkout_address_2"
+                                value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->adress_line_2 }}">
                             </div>
                             <div>
                                 <!-- Zipcode -->
                                 <label for="checkout_zipcode">Zipcode*</label>
-                                <input type="text" id="checkout_zipcode" name="zipcode" class="checkout_input" required>
+                                <input type="text" id="checkout_zipcode" name="zipcode" class="checkout_input" required
+                                value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->zipcode }}">
                             </div>
                             <div>
                                 <!-- City / Town -->
                                 <label for="checkout_city">City/Town*</label>
-                                <input type="text" name="checkout_city" id="checkout_city" class="checkout_input" required>
+                                <input type="text" name="checkout_city" id="checkout_city" class="checkout_input" required
+                                value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->city }}">
                             </div>
                             <div>
                                 <!-- Province -->
                                 <label for="checkout_province">Province*</label>
-                                <input type="text" name="checkout_province" id="checkout_province" class="checkout_input" required>
+                                <input type="text" name="checkout_province" id="checkout_province" class="checkout_input" required
+                                value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->province }}">
                             </div>
                             <div>
                                 <!-- Phone no -->
                                 <label for="checkout_phone">Phone no*</label>
-                                <input type="phone" name="phone" id="checkout_phone" class="checkout_input" required>
+                                <input type="phone" name="phone" id="checkout_phone" class="checkout_input" required
+                                value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->mobile }}">
                             </div>
                             <div>
                                 <!-- Email -->
                                 <label for="checkout_email">Email Address*</label>
-                                <input type="email" name="email" id="checkout_email" class="checkout_input" required>
+                                <input type="email" name="email" id="checkout_email" class="checkout_input" required
+                                value="{{ (auth()->user()->personal == null) ? '' : auth()->user()->personal->first()->email }}">
                             </div>
                     </div>
                 </div>
