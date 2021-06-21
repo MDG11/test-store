@@ -1,3 +1,4 @@
+@section('title', 'Order '.$order->id.' Details')
 <main style="margin:15vh 0">
     <style>
         .panel-heading{

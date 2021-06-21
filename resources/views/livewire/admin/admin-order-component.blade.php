@@ -1,3 +1,4 @@
+@section('title','Orders')
 <div class="main" style="margin: 15vh 0;">
     <style>
         nav svg{

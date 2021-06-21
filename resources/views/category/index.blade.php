@@ -6,6 +6,7 @@
 @section('custom-js')
 <script src="/js/categories.js"></script>
 @endsection
+@section('title', $category->title)
 
 
 

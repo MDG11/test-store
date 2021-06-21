@@ -6,6 +6,7 @@ use App\Filters\ProductFilter;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductReview as Review;
+use App\Models\ProductReview;
 use App\Models\ProductReviewImage as ReviewImage;
 use App\Models\User;
 use Carbon\Carbon;
@@ -60,5 +61,10 @@ class ProductController extends Controller
         }
         $products = Product::filter($request)->where('category_id', $category->id)->paginate(16);
         return view('category.index', compact('category', 'products','exists'));
+    }
+    public function commentDelete($id)
+    {   
+        ProductReview::destroy($id);
+        return back()->with('comment-message', 'Comment deleted successfully!');
     }
 }

@@ -51,7 +51,6 @@
 													@if(Auth::user()->utype === 'ADM')
 														
 														
-														<li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
 														<li><a href="{{ route('admin.categories') }}">Categories</a></li>
 														<li><a href="{{ route('admin.products') }}">Products</a></li>
 														<li><a href="{{ route('admin.productimages') }}">Product Images</a></li>
@@ -64,8 +63,6 @@
 														</form>
 														</li>
 													@else
-														//
-														<li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
 														<li><a href="{{ route('user.orders') }}">Orders</a></li>
 														<li><form id="logout_form" method="POST" action="{{route('logout')}}">
 														@csrf
@@ -83,7 +80,7 @@
 											
 										</ul>
 									</li>
-									<li><a href="/contact.html">Contact</a></li>
+									<li><a href="{{ route('contact.index') }}">Contact</a></li>
 								</ul>
 							</nav>
 							<div class="header_extra ml-auto">

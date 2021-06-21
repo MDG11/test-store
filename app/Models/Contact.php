@@ -5,13 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Coupon extends Model
+class Contact extends Model
 {
     use HasFactory;
-
-    public $fillable = ['code',
-    'type',
-    'expiry_date',
-    'value',
-    'cart_value',];
+    public $fillable = ['f_name','l_name','email','mail','subject'];
 }

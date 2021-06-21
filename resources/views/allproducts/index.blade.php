@@ -10,7 +10,7 @@
 
 
 
-@section('title', 'Головна')
+@section('title', 'All Products')
 @section('content')
 	<!-- Home -->
 

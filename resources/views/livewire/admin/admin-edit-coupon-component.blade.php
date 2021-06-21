@@ -1,3 +1,4 @@
+@section('title','Edit Coupon')
 <main style="margin-top:15vh;">
 
     <div>

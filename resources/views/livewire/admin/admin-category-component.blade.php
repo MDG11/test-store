@@ -1,3 +1,4 @@
+@section('title','Categories')
 <main style="margin-top:15vh;">
 <div>
     <style>

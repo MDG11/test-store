@@ -10,7 +10,16 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
+    
     use HasFactory;
+    public $fillable = ['alias',
+                        'title',
+                        'price',
+                        'description',
+                        'category_id',
+                        'new_price',
+                        'in_stock',
+                    ];
     public function images(){
         return $this->hasMany(ProductImage::class);
     }

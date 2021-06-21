@@ -237,9 +237,11 @@
                                                                 src="/storage/uploads/reviewImages/{{ $review_image->img }}">
                                                         @endforeach
                                                     </div>
+                                                    @if(auth()->user()->utype == 'ADM')<form class="pull-right" method="POST" action="{{ route('comment.delete', ['id' => $review->id]) }}">@csrf<button type="submit" class="btn btn-danger">X</button></form>@endif
                                                     <p class="be-comment-text">
-                                                        {{ $review->review_text }}
+                                                        {{ $review->review_text }} 
                                                     </p>
+                                                    
                                                 </div>
                                             </div>
                                             <hr>

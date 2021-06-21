@@ -1,3 +1,4 @@
+@section('title','Send Mail')
 <main style="margin-top:15vh;">
 
     <div>

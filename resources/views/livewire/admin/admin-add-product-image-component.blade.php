@@ -1,3 +1,4 @@
+@section('title','Add Product Image')
 <main style="margin-top:15vh;">
 
     <div>

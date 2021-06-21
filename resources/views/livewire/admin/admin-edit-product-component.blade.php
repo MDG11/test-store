@@ -1,3 +1,4 @@
+@section('title','Edit Product')
 <main style="padding: 20vh 0px">
     <div class="container" style="padding: 30px 0;">
         <div class="row">

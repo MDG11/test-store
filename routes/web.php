@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\CouponController;
 use App\Http\Livewire\Admin\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\AdminAddCouponComponent;
@@ -42,23 +43,25 @@ Route::get('/all-products', [ProductController::class, 'showProducts'])->name("s
 Route::get('/category/{cat}/{alias}', [ProductController::class, 'show'])->name("showProduct");
 Route::get('/category/{cat}', [ProductController::class, 'showCategory'])->name("showCategory");
 Route::post('/product/{product_id}/review/post', [ProductController::class, 'postReview'])->name('review.post');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');
-Route::get('/cart/delete/{cart_product_id}', [CartController::class, 'deleteFromCart'])->name('cart.delete');
-Route::get('/cart/cleat', [CartController::class, 'clearCart'])->name('clearCart');
-Route::post('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-Route::post('/couponapply', [CouponController::class, 'applyCoupon'])->name('applyCoupon');
-Route::post('/couponcancel', [CouponController::class, 'cancelCoupon'])->name('cancelCoupon');
-Route::post('/order/place', [CheckoutController::class, 'placeOrder'])->name('order.place');
-Route::get('/checkout/card', [CheckoutController::class, 'card'])->name('order.checkout');
-Route::post('/checkout/card/proceed/{order_id}', [CheckoutController::class, 'proceed_payment'])->name('proceed.payment');
-Route::get('/thankyou', [CheckoutController::class, 'thank'])->name('thankyou');
 Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscription.start');
 Route::get('/subscribe/cancel/{email}', [HomeController::class, 'subscribeCancel'])->name('subscription.stop');
+Route::get('/contact-us', [ContactFormController::class, 'index'])->name('contact.index');
+Route::post('/contact-us', [ContactFormController::class, 'post'])->name('contact.post');
+
 //For User
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
-
+        Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/cart/add/{product_id}', [CartController::class, 'addToCart'])->name('cart.store');
+        Route::get('/cart/delete/{cart_product_id}', [CartController::class, 'deleteFromCart'])->name('cart.delete');
+        Route::get('/cart/cleat', [CartController::class, 'clearCart'])->name('clearCart');
+        Route::post('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+        Route::post('/couponapply', [CouponController::class, 'applyCoupon'])->name('applyCoupon');
+        Route::post('/couponcancel', [CouponController::class, 'cancelCoupon'])->name('cancelCoupon');
+        Route::post('/order/place', [CheckoutController::class, 'placeOrder'])->name('order.place');
+        Route::get('/checkout/card', [CheckoutController::class, 'card'])->name('order.checkout');
+        Route::post('/checkout/card/proceed/{order_id}', [CheckoutController::class, 'proceed_payment'])->name('proceed.payment');
+        Route::get('/thankyou', [CheckoutController::class, 'thank'])->name('thankyou');
         Route::get('/user/orders', UserOrdersComponent::class)->name('user.orders');
         Route::get('/user/orders/{order_id}', UserOrderDetailsComponent::class)->name('user.orderdetails');
 });
@@ -91,4 +94,6 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->prefix('admin')->gr
         Route::get('orders/{order_id}', AdminOrderDetailsComponent::class)->name('admin.orderdetails');
 
         Route::get('sendemail', AdminSendEmailComponent::class)->name('admin.sendemail');
+
+        Route::post('/review/delete/{id}', [ProductController::class, 'commentDelete'])->name('comment.delete');
 });
