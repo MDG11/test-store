@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\SharesController;
 use App\Http\Livewire\Admin\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\AdminAddCouponComponent;
 use App\Http\Livewire\Admin\AdminAddProductComponent;
@@ -26,6 +27,7 @@ use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserOrderDetailsComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
 use Illuminate\Support\Facades\Route;
+use Jorenvh\Share\Share;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +49,11 @@ Route::post('/subscribe', [HomeController::class, 'subscribe'])->name('subscript
 Route::get('/subscribe/cancel/{email}', [HomeController::class, 'subscribeCancel'])->name('subscription.stop');
 Route::get('/contact-us', [ContactFormController::class, 'index'])->name('contact.index');
 Route::post('/contact-us', [ContactFormController::class, 'post'])->name('contact.post');
+
+
+
+//Shares
+Route::get('/facebook', [SharesController::class, 'facebook'])->name('share.facebook');
 
 //For User
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){

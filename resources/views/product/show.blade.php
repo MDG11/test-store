@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Product '.$product->title)
 @section('custom-css')
     <link rel="stylesheet" type="text/css" href="/styles/product.css">
     <link rel="stylesheet" type="text/css" href="/styles/product_responsive.css">
@@ -173,10 +174,30 @@
                         <div class="details_share">
                             <span>Share:</span>
                             <ul>
-                                <li><a href="/#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                <li><a href="/#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="/#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="/#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <div id="social-links">
+                                    <ul>
+                                        <li>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::current() }}" class="social-button " id="" title="">
+                                                <span class="fa fa-twitter"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank" href="https://www.reddit.com/submit?title=Default+share+text&url={{ URL::current() }}" class="social-button " id="" title="">
+                                                <span class="fa fa-reddit"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.linkedin.com/sharing/share-offsite?mini=true&url={{ URL::current() }}&title=Default+share+text&summary=" class="social-button " id="" title="">
+                                                <span class="fa fa-linkedin"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::current() }}" class="social-button " id="" title="">
+                                                <span class="fa fa-facebook-square"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </ul>
                         </div>
                     </div>
@@ -237,7 +258,7 @@
                                                                 src="/storage/uploads/reviewImages/{{ $review_image->img }}">
                                                         @endforeach
                                                     </div>
-                                                    @if(auth()->user()->utype == 'ADM')<form class="pull-right" method="POST" action="{{ route('comment.delete', ['id' => $review->id]) }}">@csrf<button type="submit" class="btn btn-danger">X</button></form>@endif
+                                                    @if(auth()->check() && auth()->user()->utype == 'ADM')<form class="pull-right" method="POST" action="{{ route('comment.delete', ['id' => $review->id]) }}">@csrf<button type="submit" class="btn btn-danger">X</button></form>@endif
                                                     <p class="be-comment-text">
                                                         {{ $review->review_text }} 
                                                     </p>
