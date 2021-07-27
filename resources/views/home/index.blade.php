@@ -4,7 +4,7 @@
 
 
 
-@section('title', 'Головна')
+@section('title', 'Home')
 @section('content')
 	<!-- Home -->
 
