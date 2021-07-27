@@ -28,7 +28,7 @@ class CheckoutController extends Controller
             "payment_method" => "required",
         ]);
         $total = floatval(str_replace(',','',Cart::total())); // convert cart total to comparable float 
-        $subtotal = floatval(str_replace(',','',Cart::subtotal())); // convert cart total to comparable float 
+        $subtotal = floatval(str_replace(',','',Cart::subtotal())); // convert cart subtotal to comparable float 
         
         $order = new Order();
         $order->user_id = Auth::user()->id;

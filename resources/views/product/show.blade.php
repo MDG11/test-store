@@ -104,7 +104,7 @@
                     <div class="details_image">
                         <div class="details_image_large"><img src="/storage/uploads/productImages/{{ $image }}"
                                 alt="{{ $product->title }}">
-                            <div class="product_extra product_new"><a href="/categories.html">New</a></div>
+                            <div class="product_extra product_new"><a href="{{ route('showCategory', ['cat' => $product->category->alias]) }}">{{ $product->category->title }}</a></div>
                         </div>
                         <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
                             @if ($image == 'No_img.png')
